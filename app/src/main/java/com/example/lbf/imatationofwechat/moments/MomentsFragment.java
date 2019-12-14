@@ -132,8 +132,8 @@ public class MomentsFragment extends Fragment implements MomentsContract.View, M
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.moments_refresh_icon);
         drawable.setBitmap(bitmap);
         mRefreshLayout.setProgressView(drawable);
-        mRefreshLayout.setBackgroundColor(Color.BLACK);
-        mRefreshLayout.setProgressBackgroundColorSchemeColor(Color.BLACK);
+//        mRefreshLayout.setBackgroundColor(Color.BLACK);
+//        mRefreshLayout.setProgressBackgroundColorSchemeColor(Color.BLACK);
         mRefreshLayout.setOnRefreshListener(new CustomSwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh() {
