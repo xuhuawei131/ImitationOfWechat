@@ -28,6 +28,7 @@ import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.lbf.imatationofwechat.App;
 import com.example.lbf.imatationofwechat.R;
 
 /**
@@ -71,6 +72,10 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     // Default offset in dips from the top of the view to where the progress spinner should stop
     private static final int DEFAULT_CIRCLE_TARGET = 64;
 
+
+
+    private static final int DEFAULT_REFRESH_HEADER_HEIGHT=dip2px(App.appContext,70);
+
     private View mTarget; // the target of the gesture
     private OnRefreshListener mListener;
     private boolean mRefreshing = false;
@@ -106,6 +111,13 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 
     private View headerView;
     private View layout_header;
+
+
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
 
     private static final int[] LAYOUT_ATTRS = new int[]{
             android.R.attr.enabled
@@ -166,9 +178,12 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
                     }
                 }
                 mCurrentTargetOffsetTop = mCircleView.getTop();
-
                 Log.v("xhw", "onAnimationEnd mCurrentTargetOffsetTop=" + mCurrentTargetOffsetTop);
             } else {
+                mTarget.animate().translationY(0).setDuration(200).start();
+
+
+                Log.e("xhw","mRefreshListener onAnimationEnd ");
                 reset();
             }
         }
@@ -390,7 +405,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
             } else {
                 endTarget = (int) mSpinnerFinalOffset;
             }
-            Log.v("xhw", "setRefreshing");
+            Log.e("xhw", "setRefreshing refreshing="+refreshing);
             setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop,
                     true /* requires update */);
             mNotify = false;
@@ -411,6 +426,8 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         mScaleAnimation = new Animation() {
             @Override
             public void applyTransformation(float interpolatedTime, Transformation t) {
+
+                Log.v("xhw","startScaleUpAnimation applyTransformation interpolatedTime="+interpolatedTime);
                 setAnimationProgress(interpolatedTime);
             }
         };
@@ -575,7 +592,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         if (mTarget == null) {
             for (int i = 0; i < getChildCount(); i++) {
                 View child = getChildAt(i);
-                Log.v("xhw", "count=" + getChildCount() + " child=" + child);
                 if (child instanceof NestedScrollingChild) {
                     mTarget = child;
                     break;
@@ -624,11 +640,23 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 //            mCircleView.layout((width / 2 - circleWidth / 2), mCurrentTargetOffsetTop,
 //                    (width / 2 + circleWidth / 2), mCurrentTargetOffsetTop + circleHeight);
 
-        Log.v("xhw", "onLayout mOriginalOffsetTop=" + mOriginalOffsetTop + " mCurrentTargetOffsetTop=" + mCurrentTargetOffsetTop+" headerHeight="+headerHeight+" headerWidth="+headerWidth);
+
+        int moveY=(int) Math.abs(mTarget.getY());
+        if (moveY<DEFAULT_REFRESH_HEADER_HEIGHT){
+            headerView.layout(childLeft, moveY-headerHeight,
+//                headerWidth, (int) (headerHeight+mTarget.getY()));
+                    headerWidth, moveY);
+            headerView.offsetTopAndBottom(top);
+        }else{
+            headerView.setTranslationY(0);
+            headerView.layout(childLeft, 0,
+                headerWidth, moveY);
+        }
+
+//        Log.v("xhw", "onLayout DEFAULT_REFRESH_HEADER_HEIGHT=" + DEFAULT_REFRESH_HEADER_HEIGHT + " moveY=" + moveY+" headerHeight="+headerHeight);
 
 
-        headerView.layout(childLeft, 0,
-                headerWidth, (int) (headerHeight+mTarget.getY()));
+
 //            修改进度圈的X坐标使之位于左边
         mCircleView.layout(childLeft, mCurrentTargetOffsetTop,
                 childLeft + circleWidth, mCurrentTargetOffsetTop + circleHeight);
@@ -656,7 +684,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
             mOriginalOffsetCalculated = true;
             int circleHeigh = mCircleView.getMeasuredHeight();
             mCurrentTargetOffsetTop = mOriginalOffsetTop = -mCircleView.getMeasuredHeight();
-            Log.v("xhw", "onMeasure mOriginalOffsetTop=" + mOriginalOffsetTop + " mCurrentTargetOffsetTop=" + mCurrentTargetOffsetTop + " circleHeigh=" + circleHeigh);
         }
         mCircleViewIndex = -1;
         // Get the index of the circleview.
@@ -982,6 +1009,9 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         mProgress.setArrowScale(Math.min(1f, adjustedPercent));
 //            经过一堆数学处理后的rotation
         float rotation = (-0.25f + .4f * adjustedPercent + tensionPercent * 2) * .5f;
+
+//        Log.v("xhw","moveSpinner rotation="+rotation);
+
         mProgress.setProgressRotation(rotation);
 //            setTargetOffsetTopAndBottom(targetY - mCurrentTargetOffsetTop, true /* requires update */);
 
@@ -996,8 +1026,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 //                否则使用定义的值
             endTarget = (int) mSpinnerFinalOffset;
         }
-
-        Log.v("xhw", "moveSpinner overscrollTop=" + overscrollTop + "targetY=" + targetY + " endTarget=" + endTarget + " mCurrentTargetOffsetTop=" + mCurrentTargetOffsetTop);
 
         if (targetY >= endTarget) {
 //                下移的位置超过最终位置后就不再下移，第一个参数为偏移量
@@ -1099,7 +1127,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 
             case MotionEvent.ACTION_UP: {
 //                    手指松开时启动动画回到头部
-                mTarget.animate().translationY(0).setDuration(200).start();
+                mTarget.animate().translationY(DEFAULT_REFRESH_HEADER_HEIGHT).setDuration(200).start();
 
                 pointerIndex = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
                 if (pointerIndex < 0) {
@@ -1220,22 +1248,20 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 
 //        layout_header.offsetTopAndBottom(offset);
 
-//            layout_header.getLayoutParams().height=mCurrentTargetOffsetTop;
-
-
         mCurrentTargetOffsetTop = mCircleView.getTop();
-        LayoutParams lp=headerView.getLayoutParams();
+
+
         int top=(int) Math.abs(mTarget.getY());
-        lp.height= top;
-        headerView.setLayoutParams(lp);
-        headerView.requestLayout();
-
-
+        if (top<DEFAULT_REFRESH_HEADER_HEIGHT){
+            headerView.setTranslationY(top);
+        }else{
+            LayoutParams lp=headerView.getLayoutParams();
+            lp.height= top;
+            headerView.setLayoutParams(lp);
+            headerView.requestLayout();
+        }
         Log.v("xhw", " offset=" + offset  +" top="+top);
-
-
         if (requiresUpdate && android.os.Build.VERSION.SDK_INT < 11) {
-            Log.v("xhw", "invalidate");
             invalidate();
         }
     }

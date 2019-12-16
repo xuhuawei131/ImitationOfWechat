@@ -165,6 +165,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
      * @param endAngle end angle
      */
     public void setStartEndTrim(float startAngle, float endAngle) {
+
         mRing.setStartTrim(startAngle);
         mRing.setEndTrim(endAngle);
     }
