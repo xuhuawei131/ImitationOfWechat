@@ -74,7 +74,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 
 
 
-    private static final int DEFAULT_REFRESH_HEADER_HEIGHT=dip2px(App.appContext,70);
+    private static final int DEFAULT_REFRESH_HEADER_HEIGHT= dip2px(App.appContext,60);
 
     private View mTarget; // the target of the gesture
     private OnRefreshListener mListener;
@@ -111,7 +111,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 
     private View headerView;
     private View layout_header;
-
+    private RefreshImageUpAndDownView image_header;
 
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
@@ -360,6 +360,8 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     private void createProgressView() {
         headerView= LayoutInflater.from(getContext()).inflate(R.layout.layout_refresh_header, this,false);
         layout_header=headerView.findViewById(R.id.layout_header);
+        image_header= (RefreshImageUpAndDownView) headerView.findViewById(R.id.image_header);
+
         addView(headerView);
 
 //        layout_header = (LinearLayout) headerView.findViewById(R.id.layout_header);
@@ -650,11 +652,8 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         }else{
             headerView.setTranslationY(0);
             headerView.layout(childLeft, 0,
-                headerWidth, moveY);
+                    headerWidth, moveY);
         }
-
-//        Log.v("xhw", "onLayout DEFAULT_REFRESH_HEADER_HEIGHT=" + DEFAULT_REFRESH_HEADER_HEIGHT + " moveY=" + moveY+" headerHeight="+headerHeight);
-
 
 
 //            修改进度圈的X坐标使之位于左边
@@ -1244,7 +1243,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 
     private void setTargetOffsetTopAndBottom(int offset, boolean requiresUpdate) {
 //            mCircleView.bringToFront();
-        mCircleView.offsetTopAndBottom(offset);
+//        mCircleView.offsetTopAndBottom(offset);
 
 //        layout_header.offsetTopAndBottom(offset);
 
@@ -1260,6 +1259,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
             headerView.setLayoutParams(lp);
             headerView.requestLayout();
         }
+        image_header.setProgress(top);
         Log.v("xhw", " offset=" + offset  +" top="+top);
         if (requiresUpdate && android.os.Build.VERSION.SDK_INT < 11) {
             invalidate();
