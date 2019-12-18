@@ -116,7 +116,7 @@ public class RefreshImageUpAndDownView extends View {
     private float lastProgress=0;
 
     public void setProgress(int top) {
-        top= (int) (top*2.5);
+        top= (int)(top*2.5);
         progress = top % ITEM_HEIGHT;
         if (Math.abs(progress-lastProgress)>PAGE_ITEM_HEIGHT){
             if (top>lastTop){

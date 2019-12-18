@@ -308,11 +308,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         mCircleView.setImageDrawable(mProgress);
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-    }
-
 
     private RefreshImageUpAndDownView.OnRefreshAnimFinishListener onRefreshAnimFinishListener = new RefreshImageUpAndDownView.OnRefreshAnimFinishListener() {
         @Override
@@ -327,9 +322,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         image_header = (RefreshImageUpAndDownView) headerView.findViewById(R.id.image_header);
         image_header.setOnRefreshAnimFinishListener(onRefreshAnimFinishListener);
         addView(headerView);
-
-//        layout_header = (LinearLayout) headerView.findViewById(R.id.layout_header);
-//        text_header = (TextView) headerView.findViewById(R.id.text_header);
 
 
         mCircleView = new CircleImageView(getContext(), CIRCLE_BG_LIGHT, CIRCLE_DIAMETER / 2);
