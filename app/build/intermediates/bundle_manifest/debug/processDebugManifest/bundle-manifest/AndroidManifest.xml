@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    package="com.example.lbf.imatationofwechat"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:name="com.example.lbf.imatationofwechat.App"
+        android:allowBackup="true"
+        android:debuggable="true"
+        android:icon="@mipmap/wechat_icon"
+        android:label="@string/app_name"
+        android:logo="@mipmap/wechat_icon"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name="com.example.lbf.imatationofwechat.main.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.lbf.imatationofwechat.search.SearchActivity"
+            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity" >
+        </activity>
+        <activity
+            android:name="com.example.lbf.imatationofwechat.follow.FollowActivity"
+            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity" >
+        </activity>
+        <activity
+            android:name="com.example.lbf.imatationofwechat.searchLocalAccount.SearchLocalAccountActivity"
+            android:parentActivityName="com.example.lbf.imatationofwechat.search.SearchActivity"
+            android:theme="@style/Transparent" >
+        </activity>
+        <activity
+            android:name="com.example.lbf.imatationofwechat.chat.ChatActivity"
+            android:launchMode="singleTask"
+            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name="com.example.lbf.imatationofwechat.chooseImage.ChooseImageActivity" />
+        <activity android:name="com.example.lbf.imatationofwechat.imageDetail.ImageDetailActivity" />
+        <activity
+            android:name="com.example.lbf.imatationofwechat.moments.MomentsActivity"
+            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.example.lbf.imatationofwechat.shake.ShakeActivity"
+            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity" />
+        <activity
+            android:name="com.example.lbf.imatationofwechat.shakeSetting.ShakeSettingActivity"
+            android:parentActivityName="com.example.lbf.imatationofwechat.shake.ShakeActivity" />
+    </application>
+
+</manifest>

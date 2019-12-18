@@ -73,8 +73,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     private static final int DEFAULT_CIRCLE_TARGET = 64;
 
 
-
-    private static final int DEFAULT_REFRESH_HEADER_HEIGHT= dip2px(App.appContext,60);
+    private static final int DEFAULT_REFRESH_HEADER_HEIGHT = dip2px(App.getAppContext(), 60);
 
     private View mTarget; // the target of the gesture
     private OnRefreshListener mListener;
@@ -93,7 +92,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     private boolean mNestedScrollInProgress;
 
     private int mMediumAnimationDuration;
-    private int mCurrentTargetOffsetTop;
     // Whether or not the starting offset has been determined.
     private boolean mOriginalOffsetCalculated = false;
 
@@ -101,8 +99,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     private float mInitialDownY;
     private boolean mIsBeingDragged;
     private int mActivePointerId = INVALID_POINTER;
-    // Whether this item is scaled up rather than clipped
-    private boolean mScale;
+
 
     // Target is returning to its start offset because it was cancelled or a
     // refresh was triggered.
@@ -110,7 +107,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     private final DecelerateInterpolator mDecelerateInterpolator;
 
     private View headerView;
-    private View layout_header;
     private RefreshImageUpAndDownView image_header;
 
     public static int dip2px(Context context, float dpValue) {
@@ -122,7 +118,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     private static final int[] LAYOUT_ATTRS = new int[]{
             android.R.attr.enabled
     };
-
 
 
     private CircleImageView mCircleView;
@@ -170,41 +165,30 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         public void onAnimationEnd(Animation animation) {
             if (mRefreshing) {
                 // Make sure the progress view is fully visible
-                mProgress.setAlpha(MAX_ALPHA);
-                mProgress.start();
                 if (mNotify) {
                     if (mListener != null) {
                         mListener.onRefresh();
                     }
                 }
-                mCurrentTargetOffsetTop = mCircleView.getTop();
-                Log.v("xhw", "onAnimationEnd mCurrentTargetOffsetTop=" + mCurrentTargetOffsetTop);
+                Log.v("xhw", "onAnimationEnd ");
             } else {
-                mTarget.animate().translationY(0).setDuration(200).start();
-
-
-                Log.e("xhw","mRefreshListener onAnimationEnd ");
-                reset();
+                image_header.stopRefrshAnim();
             }
         }
     };
 
     private void reset() {
+        headerView.setVisibility(View.GONE);
+        mTarget.animate().translationY(0).setDuration(0).start();
+
         mCircleView.clearAnimation();
         mProgress.stop();
         mCircleView.setVisibility(View.GONE);
         setColorViewAlpha(MAX_ALPHA);
-        // Return the circle to its start position
-        if (mScale) {
-            setAnimationProgress(0 /* animation complete and view is hidden */);
-        } else {
 
-            int distance = mOriginalOffsetTop - mCurrentTargetOffsetTop;
-            Log.v("xhw", "reset setTargetOffsetTopAndBottom mOriginalOffsetTop=" + mOriginalOffsetTop + " mCurrentTargetOffsetTop=" + mCurrentTargetOffsetTop + " distance=" + distance);
-            setTargetOffsetTopAndBottom(distance,
-                    true /* requires update */);
-        }
-        mCurrentTargetOffsetTop = mCircleView.getTop();
+        Log.v("xhw", "reset setTargetOffsetTopAndBottom mOriginalOffsetTop=" + mOriginalOffsetTop  );
+        setTargetOffsetTopAndBottom(0,
+                true /* requires update */);
     }
 
     @Override
@@ -216,32 +200,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     private void setColorViewAlpha(int targetAlpha) {
         mCircleView.getBackground().setAlpha(targetAlpha);
         mProgress.setAlpha(targetAlpha);
-    }
-
-    /**
-     * The refresh indicator starting and resting position is always positioned
-     * near the top of the refreshing content. This position is a consistent
-     * location, but can be adjusted in either direction based on whether or not
-     * there is a toolbar or actionbar present.
-     *
-     * @param scale Set to true if there is no view at a higher z-order than
-     *              where the progress spinner is set to appear.
-     * @param start The offset in pixels from the top of this view at which the
-     *              progress spinner should appear.
-     * @param end   The offset in pixels from the top of this view at which the
-     *              progress spinner should come to rest after a successful swipe
-     *              gesture.
-     */
-    public void setProgressViewOffset(boolean scale, int start, int end) {
-        mScale = scale;
-        mCircleView.setVisibility(View.GONE);
-        mOriginalOffsetTop = mCurrentTargetOffsetTop = start;
-
-        Log.v("xhw", "setProgressViewOffset mOriginalOffsetTop=" + mOriginalOffsetTop + " mCurrentTargetOffsetTop=" + mCurrentTargetOffsetTop);
-
-        mSpinnerFinalOffset = end;
-        mUsingCustomStart = true;
-        mCircleView.invalidate();
     }
 
     /**
@@ -258,7 +216,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
      */
     public void setProgressViewEndTarget(boolean scale, int end) {
         mSpinnerFinalOffset = end;
-        mScale = scale;
         mCircleView.invalidate();
     }
 
@@ -323,7 +280,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         mSpinnerFinalOffset = DEFAULT_CIRCLE_TARGET * metrics.density;
         mTotalDragDistance = mSpinnerFinalOffset;
 
-        Log.e("xhw","mTotalDragDistance="+mTotalDragDistance);
+        Log.e("xhw", "mTotalDragDistance=" + mTotalDragDistance);
 
         mNestedScrollingParentHelper = new NestedScrollingParentHelper(this);
 
@@ -357,11 +314,18 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     }
 
 
-    private void createProgressView() {
-        headerView= LayoutInflater.from(getContext()).inflate(R.layout.layout_refresh_header, this,false);
-        layout_header=headerView.findViewById(R.id.layout_header);
-        image_header= (RefreshImageUpAndDownView) headerView.findViewById(R.id.image_header);
+    private RefreshImageUpAndDownView.OnRefreshAnimFinishListener onRefreshAnimFinishListener = new RefreshImageUpAndDownView.OnRefreshAnimFinishListener() {
+        @Override
+        public void onRefreshAnimFinish() {
+            reset();
+        }
+    };
 
+
+    private void createProgressView() {
+        headerView = LayoutInflater.from(getContext()).inflate(R.layout.layout_refresh_header, this, false);
+        image_header = (RefreshImageUpAndDownView) headerView.findViewById(R.id.image_header);
+        image_header.setOnRefreshAnimFinishListener(onRefreshAnimFinishListener);
         addView(headerView);
 
 //        layout_header = (LinearLayout) headerView.findViewById(R.id.layout_header);
@@ -373,6 +337,8 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         mProgress.setBackgroundColor(CIRCLE_BG_LIGHT);
         mCircleView.setImageDrawable(mProgress);
         mCircleView.setVisibility(View.GONE);
+
+        headerView.setVisibility(View.GONE);
         addView(mCircleView);
     }
 
@@ -401,14 +367,8 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         if (refreshing && mRefreshing != refreshing) {
             // scale and show
             mRefreshing = refreshing;
-            int endTarget = 0;
-            if (!mUsingCustomStart) {
-                endTarget = (int) (mSpinnerFinalOffset + mOriginalOffsetTop);
-            } else {
-                endTarget = (int) mSpinnerFinalOffset;
-            }
-            Log.e("xhw", "setRefreshing refreshing="+refreshing);
-            setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop,
+            Log.e("xhw", "setRefreshing refreshing=" + refreshing);
+            setTargetOffsetTopAndBottom(0,
                     true /* requires update */);
             mNotify = false;
             startScaleUpAnimation(mRefreshListener);
@@ -419,6 +379,8 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 
     private void startScaleUpAnimation(Animation.AnimationListener listener) {
         mCircleView.setVisibility(View.VISIBLE);
+
+        headerView.setVisibility(View.VISIBLE);
         if (android.os.Build.VERSION.SDK_INT >= 11) {
             // Pre API 11, alpha is used in place of scale up to show the
             // progress circle appearing.
@@ -429,7 +391,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
             @Override
             public void applyTransformation(float interpolatedTime, Transformation t) {
 
-                Log.v("xhw","startScaleUpAnimation applyTransformation interpolatedTime="+interpolatedTime);
+                Log.e("xhw", "startScaleUpAnimation applyTransformation interpolatedTime=" + interpolatedTime);
                 setAnimationProgress(interpolatedTime);
             }
         };
@@ -458,10 +420,10 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     private void setRefreshing(boolean refreshing, final boolean notify) {
         if (mRefreshing != refreshing) {
             mNotify = notify;
-            ensureTarget();
+            ensureTarget(this);
             mRefreshing = refreshing;
             if (mRefreshing) {
-                animateOffsetToCorrectPosition(mCurrentTargetOffsetTop, mRefreshListener);
+                animateOffsetToCorrectPosition(0, mRefreshListener);
             } else {
                 startScaleDownAnimation(mRefreshListener);
             }
@@ -469,12 +431,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     }
 
     private void startScaleDownAnimation(Animation.AnimationListener listener) {
-//            mScaleDownAnimation = new Animation() {
-//                @Override
-//                public void applyTransformation(float interpolatedTime, Transformation t) {
-//                    setAnimationProgress(1 - interpolatedTime);
-//                }
-//            };
 
 //            最终的偏移量就是mCircleView距离顶部的高度
         final int deltaY = -mCircleView.getBottom();
@@ -495,11 +451,6 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     }
 
     private Animation startAlphaAnimation(final int startingAlpha, final int endingAlpha) {
-        // Pre API 11, alpha is used in place of scale. Don't also use it to
-        // show the trigger point.
-        if (mScale && isAlphaUsedForScale()) {
-            return null;
-        }
         Animation alpha = new Animation() {
             @Override
             public void applyTransformation(float interpolatedTime, Transformation t) {
@@ -576,7 +527,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
      */
     @ColorInt
     public void setColorSchemeColors(int... colors) {
-        ensureTarget();
+        ensureTarget(this);
         mProgress.setColorSchemeColors(colors);
     }
 
@@ -588,15 +539,17 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         return mRefreshing;
     }
 
-    private void ensureTarget() {
+    private void ensureTarget(ViewGroup viewGroup) {
         // Don't bother getting the parent height if the parent hasn't been laid
         // out yet.
         if (mTarget == null) {
-            for (int i = 0; i < getChildCount(); i++) {
-                View child = getChildAt(i);
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
                 if (child instanceof NestedScrollingChild) {
                     mTarget = child;
                     break;
+                } else if (child instanceof ViewGroup) {
+                    ensureTarget((ViewGroup) child);
                 }
             }
         }
@@ -619,7 +572,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
             return;
         }
         if (mTarget == null) {
-            ensureTarget();
+            ensureTarget(this);
         }
         if (mTarget == null) {
             return;
@@ -643,29 +596,29 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 //                    (width / 2 + circleWidth / 2), mCurrentTargetOffsetTop + circleHeight);
 
 
-        int moveY=(int) Math.abs(mTarget.getY());
-        if (moveY<DEFAULT_REFRESH_HEADER_HEIGHT){
-            headerView.layout(childLeft, moveY-headerHeight,
+        int moveY = (int) Math.abs(mTarget.getTranslationY());
+        if (moveY < DEFAULT_REFRESH_HEADER_HEIGHT) {
+            headerView.layout(childLeft, moveY - headerHeight,
 //                headerWidth, (int) (headerHeight+mTarget.getY()));
                     headerWidth, moveY);
-            headerView.offsetTopAndBottom(top);
-        }else{
+            headerView.setTranslationY(moveY);
+        } else {
             headerView.setTranslationY(0);
             headerView.layout(childLeft, 0,
                     headerWidth, moveY);
         }
 
-
+        Log.e("xhw", "onLayout moveY=" + moveY + " DEFAULT_REFRESH_HEADER_HEIGHT=" + DEFAULT_REFRESH_HEADER_HEIGHT);
 //            修改进度圈的X坐标使之位于左边
-        mCircleView.layout(childLeft, mCurrentTargetOffsetTop,
-                childLeft + circleWidth, mCurrentTargetOffsetTop + circleHeight);
+//        mCircleView.layout(childLeft, mCurrentTargetOffsetTop,
+//                childLeft + circleWidth, mCurrentTargetOffsetTop + circleHeight);
     }
 
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (mTarget == null) {
-            ensureTarget();
+            ensureTarget(this);
         }
         if (mTarget == null) {
             return;
@@ -677,12 +630,10 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         mCircleView.measure(MeasureSpec.makeMeasureSpec(mCircleWidth, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(mCircleHeight, MeasureSpec.EXACTLY));
 
-        measureChild(headerView,widthMeasureSpec,heightMeasureSpec);
+        measureChild(headerView, widthMeasureSpec, heightMeasureSpec);
 
         if (!mUsingCustomStart && !mOriginalOffsetCalculated) {
             mOriginalOffsetCalculated = true;
-            int circleHeigh = mCircleView.getMeasuredHeight();
-            mCurrentTargetOffsetTop = mOriginalOffsetTop = -mCircleView.getMeasuredHeight();
         }
         mCircleViewIndex = -1;
         // Get the index of the circleview.
@@ -726,7 +677,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        ensureTarget();
+        ensureTarget(this);
 
         final int action = MotionEventCompat.getActionMasked(ev);
 
@@ -743,7 +694,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 Log.v("xhw", "onInterceptTouchEvent ACTION_DOWN");
-                setTargetOffsetTopAndBottom(mOriginalOffsetTop - mCircleView.getTop(), true);
+//                setTargetOffsetTopAndBottom(mOriginalOffsetTop - mCircleView.getTop(), true);
                 mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
                 mIsBeingDragged = false;
                 final float initialDownY = getMotionEventY(ev, mActivePointerId);
@@ -837,6 +788,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
                 consumed[1] = dy;
 
             }
+            Log.v("xhw", "onNestedPreScroll mTotalUnconsumed=" + mTotalUnconsumed);
             moveSpinner(mTotalUnconsumed);
         }
 
@@ -847,6 +799,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         if (mUsingCustomStart && dy > 0 && mTotalUnconsumed == 0
                 && Math.abs(dy - consumed[1]) > 0) {
             mCircleView.setVisibility(View.GONE);
+            headerView.setVisibility(View.GONE);
         }
 
         // Now let our nested parent consume the leftovers
@@ -891,6 +844,7 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         final int dy = dyUnconsumed + mParentOffsetInWindow[1];
         if (dy < 0) {
             mTotalUnconsumed += Math.abs(dy);
+            Log.v("xhw", "onNestedScroll mTotalUnconsumed=" + mTotalUnconsumed);
             moveSpinner(mTotalUnconsumed);
         }
     }
@@ -982,14 +936,12 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         if (mCircleView.getVisibility() != View.VISIBLE) {
             mCircleView.setVisibility(View.VISIBLE);
         }
-        if (!mScale) {
-            ViewCompat.setScaleX(mCircleView, 1f);
-            ViewCompat.setScaleY(mCircleView, 1f);
+        if (headerView.getVisibility() != View.VISIBLE) {
+            headerView.setVisibility(View.VISIBLE);
         }
+        ViewCompat.setScaleX(mCircleView, 1f);
+        ViewCompat.setScaleY(mCircleView, 1f);
 
-        if (mScale) {
-            setAnimationProgress(Math.min(1f, overscrollTop / mTotalDragDistance));
-        }
         if (overscrollTop < mTotalDragDistance) {
             if (mProgress.getAlpha() > STARTING_PROGRESS_ALPHA
                     && !isAnimationRunning(mAlphaStartAnimation)) {
@@ -1002,37 +954,8 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
                 startProgressAlphaMaxAnimation();
             }
         }
-        float strokeStart = adjustedPercent * .8f;
 
-        mProgress.setStartEndTrim(0f, Math.min(MAX_PROGRESS_ANGLE, strokeStart));
-        mProgress.setArrowScale(Math.min(1f, adjustedPercent));
-//            经过一堆数学处理后的rotation
-        float rotation = (-0.25f + .4f * adjustedPercent + tensionPercent * 2) * .5f;
-
-//        Log.v("xhw","moveSpinner rotation="+rotation);
-
-        mProgress.setProgressRotation(rotation);
-//            setTargetOffsetTopAndBottom(targetY - mCurrentTargetOffsetTop, true /* requires update */);
-
-
-
-//            最终刷新的位置
-        int endTarget;
-        if (!mUsingCustomStart) {
-//                没有修改使用默认的值
-            endTarget = (int) (mSpinnerFinalOffset - Math.abs(mOriginalOffsetTop));
-        } else {
-//                否则使用定义的值
-            endTarget = (int) mSpinnerFinalOffset;
-        }
-
-        if (targetY >= endTarget) {
-//                下移的位置超过最终位置后就不再下移，第一个参数为偏移量
             setTargetOffsetTopAndBottom(0, true /* requires update */);
-        } else {
-//                否则继续继续下移
-            setTargetOffsetTopAndBottom(targetY - mCurrentTargetOffsetTop, true /* requires update */);
-        }
     }
 
     private void finishSpinner(float overscrollTop) {
@@ -1043,27 +966,23 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
             mRefreshing = false;
             mProgress.setStartEndTrim(0f, 0f);
             Animation.AnimationListener listener = null;
-            if (!mScale) {
-                listener = new Animation.AnimationListener() {
+            listener = new Animation.AnimationListener() {
 
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                    }
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
 
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        if (!mScale) {
-                            startScaleDownAnimation(null);
-                        }
-                    }
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    startScaleDownAnimation(null);
+                }
 
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
 
-                };
-            }
-            animateOffsetToStartPosition(mCurrentTargetOffsetTop, listener);
+            };
+            animateOffsetToStartPosition(0, listener);
             mProgress.showArrow(false);
         }
     }
@@ -1101,6 +1020,9 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
 //                    赋值给mTarget的top使之产生拖动效果
                 mTarget.setTranslationY(overscrollTop);
 
+                Log.v("xhw", "onTouchEvent overscrollTop=" + overscrollTop);
+
+
                 if (mIsBeingDragged) {
                     if (overscrollTop > 0) {
                         moveSpinner(overscrollTop);
@@ -1125,8 +1047,15 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
                 break;
 
             case MotionEvent.ACTION_UP: {
-//                    手指松开时启动动画回到头部
-                mTarget.animate().translationY(DEFAULT_REFRESH_HEADER_HEIGHT).setDuration(200).start();
+                float distance = mTarget.getTranslationY();
+                if (distance < DEFAULT_REFRESH_HEADER_HEIGHT) {
+                    reset();
+                    mTarget.animate().translationY(0).setDuration(200).start();
+                } else {
+                    // 手指松开时启动动画回到头部
+                    mTarget.animate().translationY(DEFAULT_REFRESH_HEADER_HEIGHT).setDuration(200).start();
+                    image_header.startRefreshAnim();
+                }
 
                 pointerIndex = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
                 if (pointerIndex < 0) {
@@ -1158,23 +1087,36 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
         }
         mCircleView.clearAnimation();
         mCircleView.startAnimation(mAnimateToCorrectPosition);
+
+//        if (mRefreshing) {
+//            // Make sure the progress view is fully visible
+//            mProgress.setAlpha(MAX_ALPHA);
+//            mProgress.start();
+//            if (mNotify) {
+//                if (mListener != null) {
+//                    mListener.onRefresh();
+//                }
+//            }
+//            mCurrentTargetOffsetTop = mCircleView.getTop();
+//            Log.v("xhw", "onAnimationEnd mCurrentTargetOffsetTop=" + mCurrentTargetOffsetTop);
+//        } else {
+//            headerView.setVisibility(View.GONE);
+//            mTarget.animate().translationY(0).setDuration(200).start();
+//            reset();
+//        }
     }
 
     private void animateOffsetToStartPosition(int from, Animation.AnimationListener listener) {
-        if (mScale) {
-            // Scale the item back down
-            startScaleDownReturnToStartAnimation(from, listener);
-        } else {
-            mFrom = from;
-            mAnimateToStartPosition.reset();
-            mAnimateToStartPosition.setDuration(ANIMATE_TO_START_DURATION);
-            mAnimateToStartPosition.setInterpolator(mDecelerateInterpolator);
-            if (listener != null) {
-                mCircleView.setAnimationListener(listener);
-            }
-            mCircleView.clearAnimation();
-            mCircleView.startAnimation(mAnimateToStartPosition);
+        Log.e("xhw","animateOffsetToStartPosition");
+        mFrom = from;
+        mAnimateToStartPosition.reset();
+        mAnimateToStartPosition.setDuration(ANIMATE_TO_START_DURATION);
+        mAnimateToStartPosition.setInterpolator(mDecelerateInterpolator);
+        if (listener != null) {
+            mCircleView.setAnimationListener(listener);
         }
+        mCircleView.clearAnimation();
+        mCircleView.startAnimation(mAnimateToStartPosition);
     }
 
     private final Animation mAnimateToCorrectPosition = new Animation() {
@@ -1244,26 +1186,22 @@ public class CustomSwipeRefreshLayout extends ViewGroup implements NestedScrolli
     private void setTargetOffsetTopAndBottom(int offset, boolean requiresUpdate) {
 //            mCircleView.bringToFront();
 //        mCircleView.offsetTopAndBottom(offset);
-
 //        layout_header.offsetTopAndBottom(offset);
 
-        mCurrentTargetOffsetTop = mCircleView.getTop();
-
-
-        int top=(int) Math.abs(mTarget.getY());
-        if (top<DEFAULT_REFRESH_HEADER_HEIGHT){
+        int top = (int) Math.abs(mTarget.getTranslationY());
+        if (top < DEFAULT_REFRESH_HEADER_HEIGHT) {
             headerView.setTranslationY(top);
-        }else{
-            LayoutParams lp=headerView.getLayoutParams();
-            lp.height= top;
+        } else {
+            LayoutParams lp = headerView.getLayoutParams();
+            lp.height = top;
             headerView.setLayoutParams(lp);
             headerView.requestLayout();
         }
         image_header.setProgress(top);
-        Log.v("xhw", " offset=" + offset  +" top="+top);
-        if (requiresUpdate && android.os.Build.VERSION.SDK_INT < 11) {
-            invalidate();
-        }
+        Log.v("xhw", " offset=" + offset + " top=" + top);
+//        if (requiresUpdate && android.os.Build.VERSION.SDK_INT < 11) {
+//            invalidate();
+//        }
     }
 
     private void onSecondaryPointerUp(MotionEvent ev) {

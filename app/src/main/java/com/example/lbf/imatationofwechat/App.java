@@ -11,4 +11,12 @@ public class App extends Application {
         super.onCreate();
         appContext=this;
     }
+
+    /*
+     * 获得全局上下文
+     */
+    public static Context getAppContext() {
+        return appContext;
+    }
+
 }

@@ -1,0 +1,114 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:app="http://schemas.android.com/apk/res-auto"
+4    package="com.example.lbf.imatationofwechat"
+5    android:versionCode="1"
+6    android:versionName="1.0" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="15"
+9-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+10        android:targetSdkVersion="23" />
+10-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+11
+12    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+12-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:5:5-79
+12-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:5:22-77
+13    <uses-permission android:name="android.permission.VIBRATE" />
+13-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:6:5-65
+13-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:6:22-63
+14
+15    <application
+15-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:7:5-45:19
+16        android:name="com.example.lbf.imatationofwechat.App"
+16-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:9:9-28
+17        android:allowBackup="true"
+17-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:8:9-35
+18        android:debuggable="true"
+19        android:icon="@mipmap/wechat_icon"
+19-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:10:9-43
+20        android:label="@string/app_name"
+20-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:12:9-41
+21        android:logo="@mipmap/wechat_icon"
+21-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:11:9-43
+22        android:supportsRtl="true"
+22-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:13:9-35
+23        android:testOnly="true"
+24        android:theme="@style/AppTheme" >
+24-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:14:9-40
+25        <activity android:name="com.example.lbf.imatationofwechat.main.MainActivity" >
+25-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:15:9-20:20
+25-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:15:19-52
+26            <intent-filter>
+26-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:16:13-19:29
+27                <action android:name="android.intent.action.MAIN" />
+27-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:17:17-68
+27-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:17:25-66
+28
+29                <category android:name="android.intent.category.LAUNCHER" />
+29-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:18:17-76
+29-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:18:27-74
+30            </intent-filter>
+31        </activity>
+32        <activity
+32-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:21:9-23:20
+33            android:name="com.example.lbf.imatationofwechat.search.SearchActivity"
+33-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:21:19-56
+34            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity" >
+34-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:22:13-60
+35        </activity>
+36        <activity
+36-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:24:9-26:20
+37            android:name="com.example.lbf.imatationofwechat.follow.FollowActivity"
+37-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:24:19-56
+38            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity" >
+38-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:25:13-60
+39        </activity>
+40        <activity
+40-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:27:9-30:20
+41            android:name="com.example.lbf.imatationofwechat.searchLocalAccount.SearchLocalAccountActivity"
+41-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:27:19-80
+42            android:parentActivityName="com.example.lbf.imatationofwechat.search.SearchActivity"
+42-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:28:13-64
+43            android:theme="@style/Transparent" >
+43-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:29:13-47
+44        </activity>
+45        <activity
+45-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:31:9-34:62
+46            android:name="com.example.lbf.imatationofwechat.chat.ChatActivity"
+46-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:31:19-52
+47            android:launchMode="singleTask"
+47-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:33:13-44
+48            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity"
+48-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:34:13-60
+49            android:windowSoftInputMode="adjustResize" />
+49-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:32:13-55
+50        <activity android:name="com.example.lbf.imatationofwechat.chooseImage.ChooseImageActivity" />
+50-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:35:9-68
+50-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:35:19-66
+51        <activity android:name="com.example.lbf.imatationofwechat.imageDetail.ImageDetailActivity" />
+51-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:36:9-68
+51-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:36:19-66
+52        <activity
+52-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:37:9-40:15
+53            android:name="com.example.lbf.imatationofwechat.moments.MomentsActivity"
+53-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:37:19-58
+54            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity"
+54-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:38:13-60
+55            android:windowSoftInputMode="adjustResize" />
+55-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:39:13-55
+56        <activity
+56-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:41:9-42:62
+57            android:name="com.example.lbf.imatationofwechat.shake.ShakeActivity"
+57-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:41:19-54
+58            android:parentActivityName="com.example.lbf.imatationofwechat.main.MainActivity" />
+58-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:42:13-60
+59        <activity
+59-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:43:9-44:64
+60            android:name="com.example.lbf.imatationofwechat.shakeSetting.ShakeSettingActivity"
+60-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:43:19-68
+61            android:parentActivityName="com.example.lbf.imatationofwechat.shake.ShakeActivity" />
+61-->/Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:44:13-62
+62    </application>
+63
+64</manifest>

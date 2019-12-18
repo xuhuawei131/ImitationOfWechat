@@ -1,0 +1,165 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:1-47:12
+MERGED from [com.android.support:design:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/d375e3bf9bdf3dd71394627f04b43786/design-23.2.1/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/e47d7c5ece8caecce2178c1e0438b5c7/appcompat-v7-23.2.1/AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/0e4ba139feb2b5e497a3e0d7e6a6ecb7/animated-vector-drawable-23.2.1/AndroidManifest.xml:2:1-9:12
+MERGED from [com.android.support:support-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/b9a475e458135ffcc87d1e100f65c1d5/support-vector-drawable-23.2.1/AndroidManifest.xml:2:1-9:12
+MERGED from [com.android.support:recyclerview-v7:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/263190a77fd696ac4301489f45cdbb09/recyclerview-v7-23.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/34e10d980a51c3272d93ff384dae159d/support-v4-23.2.1/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:1-47:12
+	package
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:4:5-48
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+	xmlns:app
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:3:5-56
+	android:versionName
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:1-47:12
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:1-47:12
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:5:5-79
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:5:22-77
+uses-permission#android.permission.VIBRATE
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:6:5-65
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:6:22-63
+application
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:7:5-45:19
+MERGED from [com.android.support:design:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/d375e3bf9bdf3dd71394627f04b43786/design-23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/d375e3bf9bdf3dd71394627f04b43786/design-23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/e47d7c5ece8caecce2178c1e0438b5c7/appcompat-v7-23.2.1/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:appcompat-v7:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/e47d7c5ece8caecce2178c1e0438b5c7/appcompat-v7-23.2.1/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/0e4ba139feb2b5e497a3e0d7e6a6ecb7/animated-vector-drawable-23.2.1/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/0e4ba139feb2b5e497a3e0d7e6a6ecb7/animated-vector-drawable-23.2.1/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/b9a475e458135ffcc87d1e100f65c1d5/support-vector-drawable-23.2.1/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/b9a475e458135ffcc87d1e100f65c1d5/support-vector-drawable-23.2.1/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/34e10d980a51c3272d93ff384dae159d/support-v4-23.2.1/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/34e10d980a51c3272d93ff384dae159d/support-v4-23.2.1/AndroidManifest.xml:22:5-20
+	android:supportsRtl
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:13:9-35
+	android:label
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:12:9-41
+	android:icon
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:10:9-43
+	android:allowBackup
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:8:9-35
+	android:theme
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:14:9-40
+	android:logo
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:11:9-43
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:9:9-28
+activity#com.example.lbf.imatationofwechat.main.MainActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:15:9-20:20
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:15:19-52
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:16:13-19:29
+action#android.intent.action.MAIN
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:17:17-68
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:18:17-76
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:18:27-74
+activity#com.example.lbf.imatationofwechat.search.SearchActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:21:9-23:20
+	android:parentActivityName
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:22:13-60
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:21:19-56
+activity#com.example.lbf.imatationofwechat.follow.FollowActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:24:9-26:20
+	android:parentActivityName
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:25:13-60
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:24:19-56
+activity#com.example.lbf.imatationofwechat.searchLocalAccount.SearchLocalAccountActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:27:9-30:20
+	android:parentActivityName
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:28:13-64
+	android:theme
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:29:13-47
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:27:19-80
+activity#com.example.lbf.imatationofwechat.chat.ChatActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:31:9-34:62
+	android:parentActivityName
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:34:13-60
+	android:launchMode
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:33:13-44
+	android:windowSoftInputMode
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:32:13-55
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:31:19-52
+activity#com.example.lbf.imatationofwechat.chooseImage.ChooseImageActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:35:9-68
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:35:19-66
+activity#com.example.lbf.imatationofwechat.imageDetail.ImageDetailActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:36:9-68
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:36:19-66
+activity#com.example.lbf.imatationofwechat.moments.MomentsActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:37:9-40:15
+	android:parentActivityName
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:38:13-60
+	android:windowSoftInputMode
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:39:13-55
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:37:19-58
+activity#com.example.lbf.imatationofwechat.shake.ShakeActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:41:9-42:62
+	android:parentActivityName
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:42:13-60
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:41:19-54
+activity#com.example.lbf.imatationofwechat.shakeSetting.ShakeSettingActivity
+ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:43:9-44:64
+	android:parentActivityName
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:44:13-62
+	android:name
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml:43:19-68
+uses-sdk
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:design:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/d375e3bf9bdf3dd71394627f04b43786/design-23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/d375e3bf9bdf3dd71394627f04b43786/design-23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/e47d7c5ece8caecce2178c1e0438b5c7/appcompat-v7-23.2.1/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/e47d7c5ece8caecce2178c1e0438b5c7/appcompat-v7-23.2.1/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/0e4ba139feb2b5e497a3e0d7e6a6ecb7/animated-vector-drawable-23.2.1/AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:animated-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/0e4ba139feb2b5e497a3e0d7e6a6ecb7/animated-vector-drawable-23.2.1/AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/b9a475e458135ffcc87d1e100f65c1d5/support-vector-drawable-23.2.1/AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-vector-drawable:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/b9a475e458135ffcc87d1e100f65c1d5/support-vector-drawable-23.2.1/AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:recyclerview-v7:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/263190a77fd696ac4301489f45cdbb09/recyclerview-v7-23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/263190a77fd696ac4301489f45cdbb09/recyclerview-v7-23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/34e10d980a51c3272d93ff384dae159d/support-v4-23.2.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/34e10d980a51c3272d93ff384dae159d/support-v4-23.2.1/AndroidManifest.xml:20:5-43
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:23.2.1] /Users/lingdian/.gradle/caches/transforms-2/files-2.1/e47d7c5ece8caecce2178c1e0438b5c7/appcompat-v7-23.2.1/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+		ADDED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lingdian/AndroidStudioProjects/ImitationOfWechat/app/src/main/AndroidManifest.xml
